@@ -1,0 +1,11 @@
+.menu a{
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    padding: 1rem 1rem;
+}
+
+a.active{
+    background-color: black;
+    color: white;
+}
