@@ -32,13 +32,12 @@ const NavBar = () => {
 
   const { logout } = useAuth();
 
-  const numColumnsNotAuth = navItems.filter((item) => item.auth !== "true");
   return (
     <>
       <AppBar component="nav" color="secondary">
         <Toolbar>
           <Grid container direction="row" justifyContent="space-between">
-            <Grid item xs={2} sm={1}>
+            <Grid item md={2}>
               <Typography
                 variant="h6"
                 component="div"
@@ -50,7 +49,7 @@ const NavBar = () => {
                 mini <span style={{ fontWeight: "600" }}>BLOG</span>
               </Typography>
             </Grid>
-            <Grid item xs={6} sm={4} sx={{ backgroundColor: "red" }}>
+            <Grid item md={5}>
               <Grid
                 container
                 columnSpacing={4}

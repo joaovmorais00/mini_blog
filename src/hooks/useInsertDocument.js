@@ -3,8 +3,8 @@ import { db } from "../firebase/config";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 const initialState = {
-  error: null,
   loading: null,
+  error: null,
 };
 
 const insertReducer = (state, action) => {
@@ -14,20 +14,25 @@ const insertReducer = (state, action) => {
     case "INSERTED_DOC":
       return { loading: false, error: null };
     case "ERROR":
+      console.log("chegou default");
       return { loading: false, error: action.payload };
     default:
       return state;
   }
 };
 
-export const useInsertDocument = (docColletion) => {
+export const useInsertDocument = (docCollection) => {
   const [response, dispatch] = useReducer(insertReducer, initialState);
 
   const [cancelled, setCancelled] = useState(false);
 
   const checkCancelBeforeDispatch = (action) => {
+    console.log("antes do check", action, cancelled);
+
     if (!cancelled) {
+      console.log("entrou cancelled");
       dispatch(action);
+      console.log("no check", action);
     }
   };
 
@@ -38,24 +43,36 @@ export const useInsertDocument = (docColletion) => {
     try {
       const newDocument = { ...document, createdAt: Timestamp.now() };
       const insertedDocument = await addDoc(
-        collection(db, docColletion),
+        collection(db, docCollection),
         newDocument
       );
+      console.log(insertedDocument);
       checkCancelBeforeDispatch({
         type: "INSERTED_DOC",
         payload: insertedDocument,
       });
     } catch (error) {
+      console.log(error);
       checkCancelBeforeDispatch({
         type: "ERROR",
         payload: error.message,
       });
     }
+
+    console.log("Cancelled aqui", cancelled);
   };
 
   useEffect(() => {
-    return () => setCancelled(true);
+    console.log("Criou useInsertDocument");
+    return () => {
+      console.log("Destruiu useInsertDocument");
+      setCancelled(true);
+    };
   }, []);
+
+  useEffect(() => {
+    console.log("cancelled sendo renderizado", cancelled);
+  }, [cancelled]);
 
   return { insertDocument, response };
 };

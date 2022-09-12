@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { useInsertDocument } from "../../hooks/useInsertDocument";
 import { useAuthValue } from "../../context/AuthContext";
+import { useEffect } from "react";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
@@ -15,9 +16,10 @@ const CreatePost = () => {
 
   const { user } = useAuthValue();
 
-  const { insertDocument, response } = useInsertDocument();
+  const { insertDocument, response } = useInsertDocument("posts");
 
   const handleSubmit = (event) => {
+    console.log("entrou");
     event.preventDefault();
 
     setFormError("");
@@ -27,10 +29,15 @@ const CreatePost = () => {
       imageUrl,
       content,
       tags,
-      uid: user.id,
-      createdBy: user.name,
+      uid: user.uid,
+      createdBy: user.displayName,
     });
   };
+
+  useEffect(() => {
+    console.log("Criou o create post");
+    return () => console.log("Acabou create post");
+  }, []);
 
   return (
     <div>
@@ -105,13 +112,23 @@ const CreatePost = () => {
                   />
                 </Grid>
                 <Grid item sx={{ padding: "0.4rem 0" }}>
-                  <Button
+                  {!response.loading ? (
+                    <Button variant="contained" type="submit">
+                      Criar
+                    </Button>
+                  ) : (
+                    <Button disabled variant="contained">
+                      Aguarde...
+                    </Button>
+                  )}
+                  {/* <Button
                     disabled={response.loading}
                     variant="contained"
                     type="submit"
                   >
                     {!response.loading ? "Criar" : "Aguarde"}
-                  </Button>
+                  </Button> */}
+                  {response.error}
                 </Grid>
               </Grid>
             </form>
