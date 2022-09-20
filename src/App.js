@@ -15,6 +15,7 @@ import Register from "./pages/Register/Register";
 import About from "./pages/About/About";
 import CreatePost from "./pages/CreatePost/CreatePost";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Search from "./pages/Search/Search";
 
 import {
   Box,
@@ -73,6 +74,7 @@ function App() {
 
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/search" element={<Search />} />
                   <Route
                     path="/login"
                     element={!user ? <Login /> : <Navigate to="/" />}

@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from "react";
+import { useRef, useEffect, useReducer } from "react";
 import { db } from "../firebase/config";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 
@@ -24,7 +24,8 @@ const insertReducer = (state, action) => {
 export const useInsertDocument = (docCollection) => {
   const [response, dispatch] = useReducer(insertReducer, initialState);
 
-  const [cancelled, setCancelled] = useState(false);
+  // const [cancelled, setCancelled] = useState(false);
+  const cancelled = useRef(false);
 
   const checkCancelBeforeDispatch = (action) => {
     console.log("antes do check", action, cancelled);
@@ -57,22 +58,18 @@ export const useInsertDocument = (docCollection) => {
         type: "ERROR",
         payload: error.message,
       });
+      dispatch({ type: "ERROR", payload: error.message });
     }
 
     console.log("Cancelled aqui", cancelled);
   };
 
   useEffect(() => {
-    console.log("Criou useInsertDocument");
     return () => {
-      console.log("Destruiu useInsertDocument");
-      setCancelled(true);
+      cancelled.current = true;
+      // setCancelled(true);
     };
   }, []);
-
-  useEffect(() => {
-    console.log("cancelled sendo renderizado", cancelled);
-  }, [cancelled]);
 
   return { insertDocument, response };
 };

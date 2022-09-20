@@ -15,15 +15,18 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(null);
 
   //cleanup -> lidando com memory leak
-  const [cancelled, setCancelled] = useState(false);
+  // const [cancelled, setCancelled] = useState(false);
+  let cancelled = false;
 
   const auth = getAuth();
 
   const checkIfIsCancelled = () => {
+    console.log("cancelled", cancelled);
     if (cancelled) return;
   };
 
   const createUser = async (data) => {
+    // console.log("check if is cancelled", checkIfIsCancelled());
     checkIfIsCancelled();
     setLoading(true);
     setError(null);
@@ -84,7 +87,8 @@ export const useAuth = () => {
   };
 
   useEffect(() => {
-    return () => setCancelled(true);
+    return () => (cancelled = true);
+    // setCancelled(true);
   }, []);
 
   return { auth, createUser, error, loading, logout, login };
