@@ -28,7 +28,7 @@ const Home = () => {
   return (
     <Grid direction="column" container alignItems="center" rowSpacing={8}>
       <Grid item>
-        <Typography variant="h3">HOME teste</Typography>
+        <Typography variant="h3">HOME</Typography>
       </Grid>
       <Grid item sx={{ padding: "2rem 0", width: "400px" }}>
         <form onSubmit={handleSearch}>

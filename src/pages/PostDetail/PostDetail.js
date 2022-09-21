@@ -18,8 +18,8 @@ const PostDetail = () => {
           <Grid item>
             <img
               style={{
-                width: "600px",
-                maxHeight: "500px",
+                width: "800px",
+                maxHeight: "auto",
                 objectFit: "cover",
                 objectPosition: "50% 50%",
               }}
