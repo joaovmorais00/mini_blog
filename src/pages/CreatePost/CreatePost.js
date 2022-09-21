@@ -21,7 +21,7 @@ const CreatePost = () => {
 
   const { insertDocument, response } = useInsertDocument("posts");
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     setFormError("");

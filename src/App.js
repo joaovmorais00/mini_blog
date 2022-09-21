@@ -28,6 +28,7 @@ import {
 
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
+import PostDetail from "./pages/PostDetail/PostDetail";
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -75,6 +76,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/search" element={<Search />} />
+                  <Route path="posts/:id" element={<PostDetail />} />
                   <Route
                     path="/login"
                     element={!user ? <Login /> : <Navigate to="/" />}
@@ -85,9 +87,10 @@ function App() {
                   />
                   <Route path="/about" element={<About />} />
                   <Route
-                    path="posts/createpost"
+                    path="posts/create"
                     element={user ? <CreatePost /> : <Navigate to="/" />}
                   />
+
                   <Route
                     path="/dashboard"
                     element={user ? <Dashboard /> : <Navigate to="/" />}

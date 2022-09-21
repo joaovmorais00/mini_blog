@@ -2,7 +2,7 @@ import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
 import Post from "../../components/Post/Post";
 
-import { useFetchDocument } from "../../hooks/useFetchDocument";
+import { useFetchDocuments } from "../../hooks/useFetchDocuments";
 import { useQuery } from "../../hooks/useQuery";
 
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ const Search = () => {
   const search = query.get("q");
   const navigate = useNavigate();
 
-  const { documents: posts } = useFetchDocument("posts", search);
+  const { documents: posts } = useFetchDocuments("posts", search);
 
   return (
     <Grid direction="column" alignItems="center" container rowSpacing={8}>

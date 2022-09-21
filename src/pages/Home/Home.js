@@ -4,13 +4,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Post from "../../components/Post/Post";
-import { useFetchDocument } from "../../hooks/useFetchDocument";
+import { useFetchDocuments } from "../../hooks/useFetchDocuments";
 
 import "./Home.css";
 
 const Home = () => {
   const [query, setQuery] = useState("");
-  const { documents: posts, loading, error } = useFetchDocument("posts");
+  const { documents: posts, loading, error } = useFetchDocuments("posts");
   const navigate = useNavigate();
 
   const handleSearch = (event) => {

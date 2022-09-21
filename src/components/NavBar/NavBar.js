@@ -22,7 +22,7 @@ const navItems = [
   { name: "Entrar", path: "/login", auth: "false" },
   { name: "Cadastrar", path: "/register", auth: "false" },
 
-  { name: "Novo Post", path: "/posts/createpost", auth: "true" },
+  { name: "Novo Post", path: "/posts/create", auth: "true" },
   { name: "Dashboard", path: "/dashboard", auth: "true" },
   { name: "Sobre", path: "/about", auth: "both" },
 ];

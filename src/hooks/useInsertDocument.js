@@ -25,7 +25,8 @@ export const useInsertDocument = (docCollection) => {
   const [response, dispatch] = useReducer(insertReducer, initialState);
 
   // const [cancelled, setCancelled] = useState(false);
-  const cancelled = useRef(false);
+  // const cancelled = useRef(false);
+  let cancelled = false;
 
   const checkCancelBeforeDispatch = (action) => {
     console.log("antes do check", action, cancelled);
@@ -66,8 +67,9 @@ export const useInsertDocument = (docCollection) => {
 
   useEffect(() => {
     return () => {
-      cancelled.current = true;
+      // cancelled.current = true;
       // setCancelled(true);
+      cancelled = true;
     };
   }, []);
 

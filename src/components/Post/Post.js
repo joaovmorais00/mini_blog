@@ -1,8 +1,10 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Post = ({ post }) => {
+  const navigate = useNavigate();
   return (
     <>
       {post && (
@@ -78,6 +80,7 @@ const Post = ({ post }) => {
               <Button
                 variant="outlined"
                 sx={{ fontWeight: "bold", padding: "0.4rem 2rem" }}
+                onClick={() => navigate(`/posts/${post.id}`)}
               >
                 Ler
               </Button>
