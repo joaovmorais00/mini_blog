@@ -12,6 +12,7 @@ const CreatePost = () => {
   const [content, setContent] = useState("");
   const [tags, setTags] = useState("");
   const [formError, setFormError] = useState("");
+  const [noContent, setNoContent] = useState("");
 
   const { user } = useAuthValue();
 
@@ -20,11 +21,18 @@ const CreatePost = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setFormError("");
+    setNoContent("");
     try {
       new URL(imageUrl);
     } catch (error) {
       setFormError("A imagem precisa ser uma URL");
     }
+
+    if (!content.trim()) {
+      setNoContent("Não possível cadastrar posts sem conteúdo");
+      return;
+    }
+
     const tagsArray = tags
       .split(",")
       .map((tag) => tag.trim().toLowerCase())
@@ -96,6 +104,8 @@ const CreatePost = () => {
               </Grid>
               <Grid item sx={{ width: "100%", padding: "0.4rem 0" }}>
                 <TextField
+                  error={noContent}
+                  helperText={noContent}
                   sx={{ width: "100%" }}
                   label="Conteúdo:"
                   variant="standard"

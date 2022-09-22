@@ -13,6 +13,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passError, setPassError] = useState("");
   const [error, setError] = useState("");
+  const [noName, setNoName] = useState("");
 
   const { createUser, error: authError, loading } = useAuth();
 
@@ -32,6 +33,10 @@ const Register = () => {
       email,
       password,
     };
+
+    if (!name.trim()) {
+      setNoName("Preencha com seu nome");
+    }
 
     if (password !== confirmPassword) {
       setPassError("As senhas precisam ser iguais");
@@ -79,6 +84,8 @@ const Register = () => {
             >
               <Grid item sx={{ width: "100%" }}>
                 <TextField
+                  error={noName}
+                  helperText={noName}
                   sx={{ width: "100%" }}
                   label="Nome:"
                   variant="standard"
