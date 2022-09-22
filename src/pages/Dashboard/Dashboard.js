@@ -32,6 +32,7 @@ const Dashboard = () => {
           <Grid item>
             <Button
               variant="contained"
+              sx={{ borderRadius: 0 }}
               onClick={() => navigate("/posts/create")}
             >
               Crie posts

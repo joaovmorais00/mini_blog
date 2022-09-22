@@ -1,17 +1,6 @@
-import styles from "./LogIn.module.css";
+// import styles from "./LogIn.module.css";
 
-import {
-  Button,
-  Box,
-  Grid,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
-
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { Button, Box, Grid, TextField, Typography } from "@mui/material";
 
 import { useEffect, useState } from "react";
 
@@ -20,7 +9,6 @@ import { useAuth } from "../../hooks/useAuth";
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
 
   const { login, loading, error: authError } = useAuth();
@@ -32,8 +20,8 @@ const LogIn = () => {
       email,
       password,
     };
-    const res = await login(user);
-    console.log(res);
+    await login(user);
+    // console.log(res);
   };
 
   useEffect(() => {
@@ -90,7 +78,7 @@ const LogIn = () => {
                   sx={{ width: "100%" }}
                   label="Senha:"
                   variant="standard"
-                  type={showPass ? "text" : "password"}
+                  type="password"
                   required
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}

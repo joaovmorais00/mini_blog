@@ -3,14 +3,10 @@ import { Button, Grid, TextField, Typography, Box } from "@mui/material";
 
 import { useState, useEffect } from "react";
 
-import { useNavigate } from "react-router-dom";
-
 import { useInsertDocument } from "../../hooks/useInsertDocument";
 import { useAuthValue } from "../../context/AuthContext";
 
 const CreatePost = () => {
-  const navigate = useNavigate();
-
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [content, setContent] = useState("");
@@ -23,19 +19,18 @@ const CreatePost = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     setFormError("");
-
-    // try {
-    //   new URL(imageUrl);
-    // } catch (error) {
-    //   setFormError("A imagem precisa ser uma URL");
-    // }
-
-    const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
+    try {
+      new URL(imageUrl);
+    } catch (error) {
+      setFormError("A imagem precisa ser uma URL");
+    }
+    const tagsArray = tags
+      .split(",")
+      .map((tag) => tag.trim().toLowerCase())
+      .filter((tag) => tag);
 
     if (formError) return;
-
     insertDocument({
       title,
       imageUrl,
@@ -44,14 +39,12 @@ const CreatePost = () => {
       uid: user.uid,
       createdBy: user.displayName,
     });
-
-    console.log("response fora", response);
-
+    // console.log("response fora", response);
     // if (!response.error) navigate("/");
   };
 
   useEffect(() => {
-    console.log(response, "response mudou create post");
+    // console.log(response, "response mudou create post");
   }, [response]);
 
   return (

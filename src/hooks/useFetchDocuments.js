@@ -33,6 +33,7 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
             where("tagsArray", "array-contains", search)
           );
           // console.log(q);
+        } else if (uid) {
         } else {
           q = query(collectionRef, orderBy("createdAt", "desc"));
         }
@@ -48,7 +49,7 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
 
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         setError(error);
         setLoading(false);
       }

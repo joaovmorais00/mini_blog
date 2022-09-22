@@ -21,7 +21,7 @@ export const useAuth = () => {
   const auth = getAuth();
 
   const checkIfIsCancelled = () => {
-    console.log("cancelled", cancelled);
+    // console.log("cancelled", cancelled);
     if (cancelled) return;
   };
 
@@ -41,7 +41,7 @@ export const useAuth = () => {
       setLoading(false);
       return user;
     } catch (error) {
-      console.log(error, typeof error.message);
+      // console.log(error, typeof error.message);
 
       let systemErrorMessage;
       if (error.message.includes("Password")) {
@@ -79,7 +79,7 @@ export const useAuth = () => {
       } else {
         systemErrorMessage = "Ocorreu um erro!";
       }
-      console.log("entrou catch", systemErrorMessage);
+      // console.log("entrou catch", systemErrorMessage);
 
       setError(systemErrorMessage);
       setLoading(false);

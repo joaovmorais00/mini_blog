@@ -1,27 +1,16 @@
-import styles from "./Register.module.css";
+// import styles from "./Register.module.css";
 
 import * as React from "react";
-import {
-  Button,
-  Grid,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Grid, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { Box } from "@mui/system";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPass, setShowPass] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showConfirmPass, setShowConfirmPass] = useState(false);
   const [passError, setPassError] = useState("");
   const [error, setError] = useState("");
 
@@ -53,7 +42,7 @@ const Register = () => {
 
     if (res) reset();
 
-    console.log(user, res);
+    // console.log(user, res);
   };
 
   useEffect(() => {
@@ -115,7 +104,7 @@ const Register = () => {
                   sx={{ width: "100%" }}
                   label="Senha:"
                   variant="standard"
-                  type={showPass ? "text" : "password"}
+                  type="password"
                   required
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
@@ -140,7 +129,7 @@ const Register = () => {
                   sx={{ width: "100%" }}
                   label="Confirmar senha:"
                   variant="standard"
-                  type={showConfirmPass ? "text" : "password"}
+                  type="password"
                   required
                   error={passError ? true : false}
                   helperText={passError}

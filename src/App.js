@@ -19,7 +19,6 @@ import Search from "./pages/Search/Search";
 
 import {
   Box,
-  Button,
   createTheme,
   ThemeProvider,
   Toolbar,

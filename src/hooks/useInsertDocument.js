@@ -14,7 +14,7 @@ const insertReducer = (state, action) => {
     case "INSERTED_DOC":
       return { loading: false, error: null };
     case "ERROR":
-      console.log("chegou default");
+      // console.log("chegou default");
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -29,12 +29,12 @@ export const useInsertDocument = (docCollection) => {
   let cancelled = false;
 
   const checkCancelBeforeDispatch = (action) => {
-    console.log("antes do check", action, cancelled);
+    // console.log("antes do check", action, cancelled);
 
     if (!cancelled) {
-      console.log("entrou cancelled");
+      // console.log("entrou cancelled");
       dispatch(action);
-      console.log("no check", action);
+      // console.log("no check", action);
     }
   };
 
@@ -48,13 +48,13 @@ export const useInsertDocument = (docCollection) => {
         collection(db, docCollection),
         newDocument
       );
-      console.log(insertedDocument);
+      // console.log(insertedDocument);
       checkCancelBeforeDispatch({
         type: "INSERTED_DOC",
         payload: insertedDocument,
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       checkCancelBeforeDispatch({
         type: "ERROR",
         payload: error.message,
@@ -62,7 +62,7 @@ export const useInsertDocument = (docCollection) => {
       dispatch({ type: "ERROR", payload: error.message });
     }
 
-    console.log("Cancelled aqui", cancelled);
+    // console.log("Cancelled aqui", cancelled);
   };
 
   useEffect(() => {

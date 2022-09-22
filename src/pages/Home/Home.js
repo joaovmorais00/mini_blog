@@ -1,5 +1,4 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
-import { Box } from "@mui/system";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -17,12 +16,15 @@ const Home = () => {
     event.preventDefault();
 
     if (query) {
-      return navigate(`search?q=${query}`);
+      let lowerCase = query.toLowerCase();
+      setQuery(query.toLowerCase());
+      console.log(query, "query");
+      return navigate(`search?q=${lowerCase}`);
     }
   };
 
   useEffect(() => {
-    console.log(posts);
+    // console.log(posts);
   }, [posts]);
 
   return (
@@ -66,6 +68,8 @@ const Home = () => {
       {/* {["", ""].map(() => (
         <Post />
       ))} */}
+
+      {error && <Typography>{error}</Typography>}
     </Grid>
   );
 };

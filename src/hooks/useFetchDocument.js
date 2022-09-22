@@ -13,18 +13,18 @@ export const useFetchDocument = (docCollection, id) => {
 
   useEffect(() => {
     const loadDocument = async () => {
-      console.log("chamou loadDocument");
+      // console.log("chamou loadDocument");
       if (cancelled) return;
       setLoading(true);
 
       try {
         const docRef = doc(db, docCollection, id);
         const docSnap = await getDoc(docRef);
-        console.log(docSnap.data(), "docSnap");
+        // console.log(docSnap.data(), "docSnap");
         setDocument(docSnap.data());
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         setError(error);
         setLoading(false);
       }

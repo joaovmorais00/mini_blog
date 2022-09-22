@@ -1,18 +1,13 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../hooks/useAuth";
 
 import { useAuthValue } from "../../context/AuthContext";
-
-import { useEffect } from "react";
 
 import styles from "./NavBar.module.css";
 import { Grid } from "@mui/material";
@@ -32,6 +27,8 @@ const NavBar = () => {
 
   const { logout } = useAuth();
 
+  const navigate = useNavigate();
+
   return (
     <>
       <AppBar component="nav" color="secondary">
@@ -44,7 +41,9 @@ const NavBar = () => {
                 sx={{
                   display: { xs: "none", sm: "block" },
                   fontFamily: "Montserrat, sans-serif !important",
+                  cursor: "pointer",
                 }}
+                onClick={() => navigate("/")}
               >
                 mini <span style={{ fontWeight: "600" }}>BLOG</span>
               </Typography>
